@@ -1,3 +1,5 @@
++ removes only self-registered users without advanced roles
+
 Admin Tool Inactive User Cleanup
 ================================
 
