@@ -1,4 +1,4 @@
-+ removes only self-registered users without advanced roles
++ deletes only self-registered users (“email” and “oauth2”) without extended roles (other than “student”)
 
 Admin Tool Inactive User Cleanup
 ================================
