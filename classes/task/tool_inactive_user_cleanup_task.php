@@ -53,7 +53,7 @@ class tool_inactive_user_cleanup_task extends \core\task\scheduled_task {
         if($inactivity>0){
             $subject = get_config('tool_inactive_user_cleanup', 'emailsubject');
             $body = get_config('tool_inactive_user_cleanup', 'emailbody');
-            $users = $DB->get_records('user', array('deleted' => '0'));
+            $users = $DB->get_records('user', array('deleted' => '0'), 'auth' => 'email'));
             $messagetext = html_to_text($body);
             $mainadminuser = get_admin();
             foreach ($users as $usersdetails) {
