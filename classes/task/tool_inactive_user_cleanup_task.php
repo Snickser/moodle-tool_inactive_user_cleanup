@@ -82,17 +82,19 @@ $users = $DB->get_records_sql("SELECT * from mdl_user WHERE deleted=0 AND (auth=
                     }
                 }
                 if ($beforedelete != 0 &&  $usersdetails->lastaccess != 0) {
-if(isset($exclude[$usersdetails->id])){ 
-    mtrace("EXCLUDE $usersdetails->id $usersdetails->username $usersdetails->email");
-    continue;
-}
                     $deleteuserafternotify = $DB->get_record('tool_inactive_user_cleanup', array('userid' => $usersdetails->id));
                     if (!empty($deleteuserafternotify)) {
                         $mailssent = $deleteuserafternotify->date;
                         $diff = round((time() - $mailssent) / 60 / 60 / 24);
                         if ($diff > $beforedelete) {
+
+if(isset($exclude[$usersdetails->id])){ 
+    mtrace("EXCLUDE $usersdetails->id $usersdetails->username $usersdetails->email");
+    continue;
+}
+
                             if (!isguestuser($usersdetails->id)) {
-                                delete_user($usersdetails);
+//                                delete_user($usersdetails);
                                 mtrace(get_string('deleteduser','tool_inactive_user_cleanup') . $usersdetails->id);
                                 mtrace(get_string('detetsuccess','tool_inactive_user_cleanup'));
                             }
