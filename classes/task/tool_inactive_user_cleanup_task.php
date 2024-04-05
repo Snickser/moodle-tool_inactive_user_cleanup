@@ -64,11 +64,6 @@ $users = $DB->get_records_sql("SELECT * from mdl_user WHERE deleted=0 AND (auth=
             $messagetext = html_to_text($body);
             $mainadminuser = get_admin();
             foreach ($users as $usersdetails) {
-
-if(isset($exclude[$usersdetails->id])){ 
-    mtrace("EXCLUDE $usersdetails->id $usersdetails->username $usersdetails->email");
-    continue;
-}
                 $minus = round((time() - $usersdetails->lastaccess) / 60 / 60 / 24);
                 if ($minus > $inactivity) {
                     $ischeck = $DB->get_record('tool_inactive_user_cleanup', array('userid' => $usersdetails->id));
@@ -87,6 +82,10 @@ if(isset($exclude[$usersdetails->id])){
                     }
                 }
                 if ($beforedelete != 0 &&  $usersdetails->lastaccess != 0) {
+if(isset($exclude[$usersdetails->id])){ 
+    mtrace("EXCLUDE $usersdetails->id $usersdetails->username $usersdetails->email");
+    continue;
+}
                     $deleteuserafternotify = $DB->get_record('tool_inactive_user_cleanup', array('userid' => $usersdetails->id));
                     if (!empty($deleteuserafternotify)) {
                         $mailssent = $deleteuserafternotify->date;
