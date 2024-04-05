@@ -53,10 +53,18 @@ class tool_inactive_user_cleanup_task extends \core\task\scheduled_task {
         if($inactivity>0){
             $subject = get_config('tool_inactive_user_cleanup', 'emailsubject');
             $body = get_config('tool_inactive_user_cleanup', 'emailbody');
-            $users = $DB->get_records_sql("SELECT * from mdl_user WHERE deleted=0 AND (auth='email' OR auth='oauth2')");
+
+$vips = $DB->get_records_sql("select * from mdl_role_assignments where not roleid=5");
+$exclude = array();
+foreach($vips as $vip){
+    $exclude[$vip->userid] = true;
+}
+$users = $DB->get_records_sql("SELECT * from mdl_user WHERE deleted=0 AND (auth='email' OR auth='oauth2')");
+
             $messagetext = html_to_text($body);
             $mainadminuser = get_admin();
             foreach ($users as $usersdetails) {
+if(isset($exclude[$usersdetails->id])){ echo "EXCLUDE $usersdetails->id $usersdetails->username $usersdetails->email\n";
                 $minus = round((time() - $usersdetails->lastaccess) / 60 / 60 / 24);
                 if ($minus > $inactivity) {
                     $ischeck = $DB->get_record('tool_inactive_user_cleanup', array('userid' => $usersdetails->id));
