@@ -94,7 +94,7 @@ if(isset($exclude[$usersdetails->id])){
 }
 
                             if (!isguestuser($usersdetails->id)) {
-//                                delete_user($usersdetails);
+                                delete_user($usersdetails);
                                 mtrace(get_string('deleteduser','tool_inactive_user_cleanup') . $usersdetails->id);
                                 mtrace(get_string('detetsuccess','tool_inactive_user_cleanup'));
                             }
