@@ -37,6 +37,7 @@ if (!empty($configdata->daysbeforedeletion)) {
     $data->config_daysofinactivity = $configdata->daysofinactivity;
     $data->config_subjectemail = $configdata->emailsubject;
     $data->config_bodyemail['text'] = $configdata->emailbody;
+    $data->config_skipadmins = $configdata->skipadmins;
     $settingsform->set_data($data);
 }
 $settingsform->display();
@@ -46,6 +47,7 @@ if ($settingsform->is_submitted()) {
     set_config('daysofinactivity', $fromdata->config_daysofinactivity, 'tool_inactive_user_cleanup');
     set_config('emailsubject', $fromdata->config_subjectemail, 'tool_inactive_user_cleanup');
     set_config('emailbody', $fromdata->config_bodyemail['text'], 'tool_inactive_user_cleanup');
+    set_config('skipadmins', $fromdata->config_skipadmins, 'tool_inactive_user_cleanup');
 }
 
 echo $OUTPUT->footer();
