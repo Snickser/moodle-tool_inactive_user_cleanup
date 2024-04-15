@@ -41,13 +41,19 @@ class tool_inactive_user_cleanup_config_form extends moodleform {
         $mform->addElement('header', 'configheader', get_string('setting', 'tool_inactive_user_cleanup'));
         $mform->addElement('text', 'config_daysofinactivity', get_string('daysofinactivity', 'tool_inactive_user_cleanup'));
         $mform->addElement('text', 'config_daysbeforedeletion', get_string('daysbeforedeletion', 'tool_inactive_user_cleanup'));
+
+        $mform->addElement('advcheckbox', 'config_skipadmins', get_string('skipadmins', 'tool_inactive_user_cleanup'),
+                           get_string('skipadmins', 'tool_inactive_user_cleanup'));
+        $mform->addHelpButton('config_skipadmins', 'skipadmins', 'tool_inactive_user_cleanup');
+        $mform->setType('config_skipadmins', PARAM_INT);
+
         $mform->addElement('static', 'description','' ,get_string('deletiondescription', 'tool_inactive_user_cleanup'));
         $mform->setDefault('config_daysofinactivity', '365');
         $mform->setType('config_daysofinactivity', PARAM_INT);
         $mform->setDefault('config_daysbeforedeletion', '10');
         $mform->setType('config_daysbeforedeletion', PARAM_INT);
         $mform->addElement('header', 'config_headeremail', get_string('emailsetting', 'tool_inactive_user_cleanup'));
-        $mform->addElement('text', 'config_subjectemail', get_string('emailsubject', 'tool_inactive_user_cleanup'), ["size" => "50"]);
+        $mform->addElement('text', 'config_subjectemail', get_string('emailsubject', 'tool_inactive_user_cleanup'));
         $editoroptions = array('trusttext' => true, 'subdirs' => true, 'maxfiles' => 1,
         'maxbytes' => 1024);
         $mform->addElement('editor', 'config_bodyemail', get_string('emailbody', 'tool_inactive_user_cleanup'), $editoroptions);
@@ -55,6 +61,6 @@ class tool_inactive_user_cleanup_config_form extends moodleform {
         $mform->setDefault('config_subjectemail', 'subject');
         $mform->setType('config_bodyemail', PARAM_RAW);
         $mform->setDefault('config_bodyemail', 'body');
-        $this->add_action_buttons();
+        $this->add_action_buttons(false);
     }
 }
