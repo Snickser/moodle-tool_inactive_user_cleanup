@@ -48,7 +48,10 @@ class tool_inactive_user_cleanup_config_form extends moodleform {
         $mform->addHelpButton('config_skipadmins', 'skipadmins', 'tool_inactive_user_cleanup');
         $mform->setType('config_skipadmins', PARAM_INT);
 
-	 $mform->addElement('advcheckbox', 'config_realdelete',get_string('realdelete','tool_inactive_user_cleanup'));
+        $mform->addElement('advcheckbox', 'config_realdelete',
+        get_string('realdelete','tool_inactive_user_cleanup'),
+        get_string('realdelete','tool_inactive_user_cleanup'));
+
         $mform->setDefault('config_daysofinactivity', '365');
         $mform->setType('config_daysofinactivity', PARAM_INT);
         $mform->setDefault('config_daysbeforedeletion', '10');
