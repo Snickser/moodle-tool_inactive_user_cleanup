@@ -51,6 +51,7 @@ class tool_inactive_user_cleanup_task extends \core\task\scheduled_task {
         $beforedelete = get_config('tool_inactive_user_cleanup', 'daysbeforedeletion');
         $inactivity = get_config('tool_inactive_user_cleanup', 'daysofinactivity');
         $skipadmins = get_config('tool_inactive_user_cleanup', 'skipadmins');
+	$realdelete = get_config('tool_inactive_user_cleanup', 'realdelete');
         if($inactivity>0){
             $subject = get_config('tool_inactive_user_cleanup', 'emailsubject');
             $body = get_config('tool_inactive_user_cleanup', 'emailbody');
@@ -95,7 +96,7 @@ if(isset($exclude[$usersdetails->id]) && $skipadmins){
     continue;
 }
                             if (!isguestuser($usersdetails->id)) {
-//                                delete_user($usersdetails);
+                              if ($realdelete){  delete_user($usersdetails); }
                                 mtrace(get_string('deleteduser','tool_inactive_user_cleanup') . $usersdetails->id);
                                 mtrace(get_string('detetsuccess','tool_inactive_user_cleanup'));
                             }
