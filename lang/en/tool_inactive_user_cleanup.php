@@ -43,3 +43,4 @@ $string['userid'] = 'USER ID ';
 $string['skipadmins'] = 'Skip admin users';
 $string['skipadmins_help'] = 'Only deletes self-registered users (email or oauth2) with the student role and no advanced roles.';
 $string['realdelete'] = 'Do real deletion';
+$string['deletionwarning'] = '<font color=red>Turn it on only if you are fully aware of what you are doing!</font>';

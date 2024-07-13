@@ -50,7 +50,7 @@ class tool_inactive_user_cleanup_config_form extends moodleform {
 
         $mform->addElement('advcheckbox', 'config_realdelete',
         get_string('realdelete','tool_inactive_user_cleanup'),
-        get_string('realdelete','tool_inactive_user_cleanup'));
+        get_string('deletionwarning', 'tool_inactive_user_cleanup'));
 
         $mform->setDefault('config_daysofinactivity', '365');
         $mform->setType('config_daysofinactivity', PARAM_INT);
