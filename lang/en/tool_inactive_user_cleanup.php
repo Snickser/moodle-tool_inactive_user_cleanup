@@ -41,4 +41,5 @@ $string['emailsent'] = 'Email sent';
 $string['userinactivtime'] = 'User is inactive for past day ';
 $string['userid'] = 'USER ID ';
 $string['skipadmins'] = 'Skip admin users';
-$string['skipadmins_help'] = 'Only deletes self-registered users (email or oauth) with the student role and no advanced roles.';
+$string['skipadmins_help'] = 'Only deletes self-registered users (email or oauth2) with the student role and no advanced roles.';
+$string['realdelete'] = 'Do real deletion';
