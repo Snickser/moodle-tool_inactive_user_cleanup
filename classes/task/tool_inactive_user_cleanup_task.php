@@ -96,7 +96,11 @@ if(isset($exclude[$usersdetails->id]) && $skipadmins){
     continue;
 }
                             if (!isguestuser($usersdetails->id)) {
-                              if ($realdelete){ delete_user($usersdetails); }
+                                if ($realdelete) {
+                            	    delete_user($usersdetails);
+				} else {
+                            	    mtrace('No real delete');
+                                }
                                 mtrace(get_string('deleteduser','tool_inactive_user_cleanup') . $usersdetails->id);
                                 mtrace(get_string('detetsuccess','tool_inactive_user_cleanup'));
                             }
