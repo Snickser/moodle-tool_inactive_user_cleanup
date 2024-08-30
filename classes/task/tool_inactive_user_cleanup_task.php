@@ -52,13 +52,15 @@ class tool_inactive_user_cleanup_task extends \core\task\scheduled_task {
         $inactivity = get_config('tool_inactive_user_cleanup', 'daysofinactivity');
         $skipadmins = get_config('tool_inactive_user_cleanup', 'skipadmins');
 	$realdelete = get_config('tool_inactive_user_cleanup', 'realdelete');
-        if($inactivity>0){
-            $subject = get_config('tool_inactive_user_cleanup', 'emailsubject');
-            $body = get_config('tool_inactive_user_cleanup', 'emailbody');
 
         if ($realdelete) {
 	    mtrace('No real delete mode!');
         }                        }
+
+        if($inactivity>0){
+            $subject = get_config('tool_inactive_user_cleanup', 'emailsubject');
+            $body = get_config('tool_inactive_user_cleanup', 'emailbody');
+        }
 
 if($skipadmins){
     $vips = $DB->get_records_sql("select * from mdl_role_assignments where not roleid=5");
@@ -109,11 +111,9 @@ if(isset($exclude[$usersdetails->id]) && $skipadmins){
                     }
                 }
             }
-        }else{
+        } else {
             mtrace(get_string('invalaliddayofinactivity','tool_inactive_user_cleanup'));
         }
-        
-
         mtrace(get_string('taskend','tool_inactive_user_cleanup'));
     }//end of function execute()
 }// End of class
