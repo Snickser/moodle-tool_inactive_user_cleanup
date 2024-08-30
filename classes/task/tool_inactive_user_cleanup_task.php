@@ -24,8 +24,8 @@
  * tool_inactive_user_cleanup is standard cron function
  */
 namespace tool_inactive_user_cleanup\task;
-defined('MOODLE_INTERNAL') || die();
 
+defined('MOODLE_INTERNAL') || die();
 
 /**
  * Scheduled task for Inactive user cleanup.
@@ -55,12 +55,11 @@ class tool_inactive_user_cleanup_task extends \core\task\scheduled_task {
 
         if ($realdelete) {
 	    mtrace('No real delete mode!');
-        }                        }
+        }
 
-        if($inactivity>0){
+        if ($inactivity>0) {
             $subject = get_config('tool_inactive_user_cleanup', 'emailsubject');
             $body = get_config('tool_inactive_user_cleanup', 'emailbody');
-        }
 
 if($skipadmins){
     $vips = $DB->get_records_sql("select * from mdl_role_assignments where not roleid=5");
@@ -70,6 +69,7 @@ if($skipadmins){
     }
     $users = $DB->get_records_sql("SELECT * from mdl_user WHERE deleted=0 AND (auth='email' OR auth='oauth2')");
 }
+
             $messagetext = html_to_text($body);
             $mainadminuser = get_admin();
             foreach ($users as $usersdetails) {
