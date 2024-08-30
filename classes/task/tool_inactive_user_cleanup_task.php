@@ -54,7 +54,7 @@ class tool_inactive_user_cleanup_task extends \core\task\scheduled_task {
 	$realdelete = get_config('tool_inactive_user_cleanup', 'realdelete');
 
         if (!$realdelete) {
-	    mtrace('No real delete mode!');
+	    mtrace('--- No real delete mode!');
         }
 
         if ($inactivity>0) {
