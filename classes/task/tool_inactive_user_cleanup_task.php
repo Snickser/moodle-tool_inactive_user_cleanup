@@ -53,7 +53,7 @@ class tool_inactive_user_cleanup_task extends \core\task\scheduled_task {
         $skipadmins = get_config('tool_inactive_user_cleanup', 'skipadmins');
 	$realdelete = get_config('tool_inactive_user_cleanup', 'realdelete');
 
-        if ($realdelete) {
+        if (!$realdelete) {
 	    mtrace('No real delete mode!');
         }
 
