@@ -56,6 +56,10 @@ class tool_inactive_user_cleanup_task extends \core\task\scheduled_task {
             $subject = get_config('tool_inactive_user_cleanup', 'emailsubject');
             $body = get_config('tool_inactive_user_cleanup', 'emailbody');
 
+        if ($realdelete) {
+	    mtrace('No real delete mode!');
+        }                        }
+
 if($skipadmins){
     $vips = $DB->get_records_sql("select * from mdl_role_assignments where not roleid=5");
     $exclude = array();
@@ -77,7 +81,6 @@ if($skipadmins){
                             mtrace(get_string('userid','tool_inactive_user_cleanup'));
                             mtrace($usersdetails->id. '---' .$usersdetails->email);
                             mtrace(get_string('userinactivtime','tool_inactive_user_cleanup') . $minus);
-//                            mtrace();
                             $record->emailsent = 1;
                             $record->date = time();
                             $lastinsertid = $DB->insert_record('tool_inactive_user_cleanup', $record, false);
@@ -98,8 +101,6 @@ if(isset($exclude[$usersdetails->id]) && $skipadmins){
                             if (!isguestuser($usersdetails->id)) {
                                 if ($realdelete) {
                             	    delete_user($usersdetails);
-				} else {
-                            	    mtrace('No real delete');
                                 }
                                 mtrace(get_string('deleteduser','tool_inactive_user_cleanup') . $usersdetails->id);
                                 mtrace(get_string('detetsuccess','tool_inactive_user_cleanup'));
