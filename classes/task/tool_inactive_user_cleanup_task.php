@@ -80,9 +80,7 @@ if($skipadmins){
                         $record = new \stdClass();
                         $record->userid = $usersdetails->id;
                         if (email_to_user($usersdetails, $mainadminuser, $subject, $messagetext)) {
-                            mtrace(get_string('userid','tool_inactive_user_cleanup'));
-                            mtrace($usersdetails->id. '---' .$usersdetails->email);
-                            mtrace(get_string('userinactivtime','tool_inactive_user_cleanup') . $minus);
+                            mtrace('Inactive user '.$usersdetails->id.' '.$usersdetails->email);
                             $record->emailsent = 1;
                             $record->date = time();
                             $lastinsertid = $DB->insert_record('tool_inactive_user_cleanup', $record, false);
