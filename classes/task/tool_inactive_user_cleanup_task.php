@@ -80,7 +80,8 @@ if($skipadmins){
                         $record = new \stdClass();
                         $record->userid = $usersdetails->id;
                         if (email_to_user($usersdetails, $mainadminuser, $subject, $messagetext)) {
-                            mtrace('Inactive user '.$usersdetails->id.' '.$usersdetails->email);
+                            mtrace(get_string('emailsent','tool_inactive_user_cleanup').' '.
+                               $usersdetails->id.' '.$usersdetails->username.' '.$usersdetails->email);
                             $record->emailsent = 1;
                             $record->date = time();
                             $lastinsertid = $DB->insert_record('tool_inactive_user_cleanup', $record, false);
@@ -99,7 +100,7 @@ if(isset($exclude[$usersdetails->id]) && $skipadmins){
     continue;
 }
                             if (!isguestuser($usersdetails->id)) {
-                                mtrace(get_string('deleteduser','tool_inactive_user_cleanup') .
+                                mtrace(get_string('deleteduser','tool_inactive_user_cleanup').' '.
                                        $usersdetails->id . ' ' . $usersdetails->username . ' ' . $usersdetails->email);
                                 if ($realdelete) {
                             	    if (delete_user($usersdetails)) {
